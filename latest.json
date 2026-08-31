@@ -1,16 +1,11 @@
 {
   "product": "MoneyTransfer",
-  "version": "7.31.0",
+  "version": "7.30.0",
   "channel": "Stable",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_31_0_Transaction_Traceability.zip",
-  "sha256": "deb59d664c6b738f5d4b8e94d61bc5bf2bd4a84177170ab845d3890cc7fc0040",
+  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_30_0_Operational_Dashboard.zip",
+  "sha256": "4347b4136447fa8f6edcdf1ea8f2fad595e77043d5ca6f9f066404f1c39d6c1f",
   "notes_ar": [
-    "إضافة نافذة تفاصيل كاملة لكل عملية من سجل العمليات الموحد.",
-    "فتح التفاصيل بالنقر المزدوج أو زر تفاصيل العملية.",
-    "عرض الحركات المحاسبية الفعلية للحسابات في عمليات السيرفر.",
-    "عرض الوردية والعميل ومعرفات Server TX وClient TX والحالة والمستخدم.",
-    "إضافة نسخ التفاصيل وحفظ PDF والطباعة والمشاركة من نفس النافذة.",
-    "إضافة API لجلب تفاصيل عملية واحدة بأحدث بياناتها.",
-    "لا تحتوي الحزمة على قاعدة بيانات أو أرصدة أو عمليات مالية."
+    "تمت إعادة قناة Stable مؤقتاً إلى V7.30.0 أثناء إعادة التحقق من حزمة V7.31.0.",
+    "لا يوجد أي تغيير على قاعدة البيانات أو الأرصدة أو العمليات المالية."
   ]
 }
