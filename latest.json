@@ -1,15 +1,14 @@
 {
   "product": "MoneyTransfer",
-  "version": "7.28.0",
+  "version": "7.29.0",
   "channel": "Stable",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_28_0_Operations_Control.zip",
-  "sha256": "6043f8c9ad0ec3fa8c2007ba6f6514e695f9f4efdefacebd873a32f414211792",
+  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_29_0_Single_Version_Source.zip",
+  "sha256": "ce720decc7c54e4823aa479a1ffac1f480a24c1de824e887a8b8a613e0d340ff",
   "notes_ar": [
-    "تحسين سجل العمليات الموحد في Windows.",
-    "إضافة فلترة بالتاريخ من/إلى مع زر عمليات اليوم ومسح فلتر التاريخ.",
-    "إظهار إجمالي المبالغ والعمولات حسب النتائج الظاهرة.",
-    "تصدير النتائج الحالية إلى CSV عربي مناسب لـ Excel.",
-    "إضافة دعم فلترة التاريخ في API الخاص بسجل العمليات.",
-    "لا تحتوي الحزمة على قاعدة بيانات أو بيانات مالية."
+    "توحيد إدارة رقم الإصدار في مصدر واحد داخل البرنامج.",
+    "الشريط الجانبي والإعدادات ونظام التحديث والسيرفر تقرأ رقم الإصدار من نفس المصدر.",
+    "إضافة فحص تطابق الإصدارات ضمن فحص سلامة النظام لمنع اختلاف أرقام الإصدارات مستقبلاً.",
+    "إصلاح فحص اتصال السيرفر ليتعامل مع API وRuntime بشكل صحيح.",
+    "لا تحتوي الحزمة على قاعدة بيانات أو أرصدة أو عمليات مالية."
   ]
 }
