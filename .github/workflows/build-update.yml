@@ -17,14 +17,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          cat build_payload/chunk*.txt | base64 -d > releases/MoneyTransfer_Update_V7_25_0_Production_Online.zip
-          echo "6e928db528ea74747a146a0ce14b6cbb8bf5700e76874cdfd84c340b5b8d5543  releases/MoneyTransfer_Update_V7_25_0_Production_Online.zip" | sha256sum -c -
+          cat build_payload/chunk*.txt | base64 -d > releases/MoneyTransfer_Update_V7_25_1_Production_Test.zip
+          echo "8840fd412623c26281144b3ea06b107c97c8e5550f6d85a7e9d447088882ac89  releases/MoneyTransfer_Update_V7_25_1_Production_Test.zip" | sha256sum -c -
           rm -rf build_payload
       - name: Commit update asset
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add releases/MoneyTransfer_Update_V7_25_0_Production_Online.zip build_payload
-          git commit -m "Publish MoneyTransfer V7.25.0 update package"
+          git add releases/MoneyTransfer_Update_V7_25_1_Production_Test.zip build_payload
+          git commit -m "Publish MoneyTransfer V7.25.1 production test update"
           git push
