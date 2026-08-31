@@ -1,14 +1,14 @@
 {
   "product": "MoneyTransfer",
-  "version": "7.29.0",
+  "version": "7.30.0",
   "channel": "Stable",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_29_0_Single_Version_Source.zip",
-  "sha256": "ce720decc7c54e4823aa479a1ffac1f480a24c1de824e887a8b8a613e0d340ff",
+  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_30_0_Operational_Dashboard.zip",
+  "sha256": "4347b4136447fa8f6edcdf1ea8f2fad595e77043d5ca6f9f066404f1c39d6c1f",
   "notes_ar": [
-    "توحيد إدارة رقم الإصدار في مصدر واحد داخل البرنامج.",
-    "الشريط الجانبي والإعدادات ونظام التحديث والسيرفر تقرأ رقم الإصدار من نفس المصدر.",
-    "إضافة فحص تطابق الإصدارات ضمن فحص سلامة النظام لمنع اختلاف أرقام الإصدارات مستقبلاً.",
-    "إصلاح فحص اتصال السيرفر ليتعامل مع API وRuntime بشكل صحيح.",
+    "إضافة لوحة تحكم تشغيلية محسنة في الصفحة الرئيسية.",
+    "عرض عدد عمليات اليوم وإجمالي حركة اليوم وعمولات اليوم والوردية الحالية.",
+    "عرض الأرصدة وآخر العمليات مع تنبيهات اتصال السيرفر والأرصدة السالبة.",
+    "إضافة اختصارات للعملية الجديدة وسجل العمليات والتقارير.",
     "لا تحتوي الحزمة على قاعدة بيانات أو أرصدة أو عمليات مالية."
   ]
 }
