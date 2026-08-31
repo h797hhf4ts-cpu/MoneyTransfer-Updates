@@ -1,14 +1,15 @@
 {
   "product": "MoneyTransfer",
-  "version": "7.27.0",
+  "version": "7.28.0",
   "channel": "Stable",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_27_0_Unified_Sync.zip",
-  "sha256": "62b6fd3f367945b60024fff09de2828a2ae1be6134013250973c3a8e0abb056c",
+  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_28_0_Operations_Control.zip",
+  "sha256": "6043f8c9ad0ec3fa8c2007ba6f6514e695f9f4efdefacebd873a32f414211792",
   "notes_ar": [
-    "توحيد بيانات Windows والهاتف بشكل أفضل عبر السيرفر.",
-    "لوحة التحكم تقرأ الأرصدة من السيرفر أولاً مع fallback محلي عند الانقطاع.",
-    "سجل العمليات أصبح موحداً مع البحث والفلاتر وتقليل التكرار بين السجل المحلي والسيرفر.",
-    "رفع حد تحميل سجل السيرفر إلى 1000 عملية.",
+    "تحسين سجل العمليات الموحد في Windows.",
+    "إضافة فلترة بالتاريخ من/إلى مع زر عمليات اليوم ومسح فلتر التاريخ.",
+    "إظهار إجمالي المبالغ والعمولات حسب النتائج الظاهرة.",
+    "تصدير النتائج الحالية إلى CSV عربي مناسب لـ Excel.",
+    "إضافة دعم فلترة التاريخ في API الخاص بسجل العمليات.",
     "لا تحتوي الحزمة على قاعدة بيانات أو بيانات مالية."
   ]
 }
