@@ -1,0 +1,30 @@
+name: Build MoneyTransfer update asset
+
+on:
+  push:
+    paths:
+      - 'build_payload/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild ZIP from chunks
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat build_payload/chunk*.txt | base64 -d > releases/MoneyTransfer_Update_V7_25_0_Production_Online.zip
+          echo "c3c837038483b827143ca83b0e3e25bb3892783b16763696856ef388e75a9a12  releases/MoneyTransfer_Update_V7_25_0_Production_Online.zip" | sha256sum -c -
+          rm -rf build_payload
+      - name: Commit update asset
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add releases/MoneyTransfer_Update_V7_25_0_Production_Online.zip build_payload
+          git commit -m "Publish MoneyTransfer V7.25.0 update package"
+          git push
