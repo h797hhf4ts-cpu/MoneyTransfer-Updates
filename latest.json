@@ -1,17 +1,13 @@
 {
   "product": "MoneyTransfer",
-  "version": "7.34.0",
+  "version": "7.34.1",
   "channel": "Stable",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_34_0_Customers_Debts.zip",
-  "sha256": "b74f94a0e96d443c2cf7222652663f94d275d413f77be7861c1f38ebda0f98ac",
+  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_34_1_Customers_Debts_Manifest_Fix.zip",
+  "sha256": "ea8869a3a55c277724ca37fa89f8f764466971d80ad161304358167ad8792696",
   "notes_ar": [
-    "إضافة بحث فوري عن العملاء بالاسم أو رقم الهاتف.",
-    "إضافة تصفية العملاء حسب حالة الدين والقرب من حد الدين.",
-    "تطوير كشف حساب العميل ليعرض إجمالي الدين وإجمالي السداد والرصيد المتبقي وتسلسل الحركات.",
-    "إضافة تصدير كشف العميل إلى PDF والطباعة والمشاركة.",
-    "إضافة اختصارات مباشرة لإضافة دين أو تسجيل سداد من كشف العميل.",
-    "إضافة API لكشف العميل تمهيداً لتوحيد بيانات العملاء والديون مع الهاتف.",
-    "تم التحقق من الحزمة المرفوعة ومطابقتها للحزمة الأصلية قبل النشر.",
+    "إصلاح update_manifest.json بإضافة الحقول الإلزامية manifest_version و api_version و schema_version.",
+    "الحزمة تتضمن تطوير العملاء والديون في V7.34 مع البحث والتصفية وكشف العميل والطباعة والمشاركة.",
+    "تم التحقق من Git Blob SHA للحزمة المرفوعة ومطابقته للحزمة الأصلية قبل تفعيلها.",
     "لا تحتوي الحزمة على قاعدة بيانات أو أرصدة أو عمليات مالية."
   ]
 }
