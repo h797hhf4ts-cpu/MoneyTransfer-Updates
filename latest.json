@@ -1,12 +1,13 @@
 {
   "product": "MoneyTransfer",
-  "version": "7.24.1",
+  "version": "7.25.1",
   "channel": "Stable",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_24_1_Online_Test.zip",
-  "sha256": "52305ccace6f14e3fc5f7bcf7f9888f200df2c5a5bf9a273918ac6944ca22609",
+  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_25_1_Production_Test.zip",
+  "sha256": "8840fd412623c26281144b3ea06b107c97c8e5550f6d85a7e9d447088882ac89",
   "notes_ar": [
-    "اختبار التحديث عبر الإنترنت مباشرة من GitHub.",
-    "اختبار التنزيل والتحقق من SHA-256 والتثبيت وإعادة التشغيل.",
-    "لا يحتوي هذا الاختبار على قاعدة بيانات ولا يغير الأرصدة أو العمليات."
+    "اختبار إنتاجي حقيقي للتحديث عبر الإنترنت من GitHub.",
+    "يتضمن تحديث رقم الإصدار المرئي إلى V7.25.1.",
+    "يختبر التنزيل والتحقق من SHA-256 والتثبيت وإعادة التشغيل تلقائياً.",
+    "لا تحتوي الحزمة على قاعدة بيانات ولا تغيّر الأرصدة أو العمليات المالية."
   ]
 }
