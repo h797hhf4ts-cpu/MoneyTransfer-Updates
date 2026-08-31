@@ -1,13 +1,14 @@
 {
   "product": "MoneyTransfer",
-  "version": "7.25.1",
+  "version": "7.27.0",
   "channel": "Stable",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_25_1_Production_Test.zip",
-  "sha256": "8840fd412623c26281144b3ea06b107c97c8e5550f6d85a7e9d447088882ac89",
+  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_27_0_Unified_Sync.zip",
+  "sha256": "62b6fd3f367945b60024fff09de2828a2ae1be6134013250973c3a8e0abb056c",
   "notes_ar": [
-    "اختبار إنتاجي حقيقي للتحديث عبر الإنترنت من GitHub.",
-    "يتضمن تحديث رقم الإصدار المرئي إلى V7.25.1.",
-    "يختبر التنزيل والتحقق من SHA-256 والتثبيت وإعادة التشغيل تلقائياً.",
-    "لا تحتوي الحزمة على قاعدة بيانات ولا تغيّر الأرصدة أو العمليات المالية."
+    "توحيد بيانات Windows والهاتف بشكل أفضل عبر السيرفر.",
+    "لوحة التحكم تقرأ الأرصدة من السيرفر أولاً مع fallback محلي عند الانقطاع.",
+    "سجل العمليات أصبح موحداً مع البحث والفلاتر وتقليل التكرار بين السجل المحلي والسيرفر.",
+    "رفع حد تحميل سجل السيرفر إلى 1000 عملية.",
+    "لا تحتوي الحزمة على قاعدة بيانات أو بيانات مالية."
   ]
 }
