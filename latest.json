@@ -1,13 +1,15 @@
 {
   "product": "MoneyTransfer",
-  "version": "8.0.11",
+  "version": "8.3.5",
   "channel": "Stable",
-  "package_url": "https://github.com/h797hhf4ts-cpu/MoneyTransfer-Updates/releases/download/v8.0.11/MoneyTransfer_Update_V8_0_11_STABLE_RECOVERY.1.zip",
-  "sha256": "d8f1e2b958fa5ace2f4f73bc5bc525fed6faf5e525b8bac0dc55ff4bcb2a609a",
+  "sequence": 803500,
+  "schema_version": 9,
+  "package_url": "https://github.com/h797hhf4ts-cpu/MoneyTransfer-Updates/releases/download/v8.3.5/MoneyTransfer_Update_V8_3_5_COMBINED_FIX.zip",
+  "sha256": "873dc5e882797a8b435362950ffda32a8d49f8ee319eca578a5d9dbd636b9576",
   "notes_ar": [
-    "إصلاح مسار اكتشاف وتطبيق التحديث.",
-    "توحيد قناة الحزمة والخادم على Stable.",
-    "الحفاظ على قاعدة البيانات والترخيص والبيانات المحلية.",
-    "يتضمن إصلاحات العمليات والدين والحوالات المعلقة السابقة."
+    "إصلاح تعديل وشطب العمليات للعمل محلياً دون الاعتماد على رقم معاملة السيرفر.",
+    "عند شطب العملية يتم عكس أثرها المالي وإرجاع الأرصدة والحسابات المتأثرة وإلغاء عمولتها من النتائج المالية.",
+    "إصلاح حفظ الحوالة الواردة المعلقة من اختصار العمليات.",
+    "الحفاظ على قاعدة بيانات العميل والترخيص والنسخ الاحتياطية والبيانات المحلية أثناء التحديث."
   ]
 }
