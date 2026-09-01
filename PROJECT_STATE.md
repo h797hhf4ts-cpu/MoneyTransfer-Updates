@@ -1,57 +1,36 @@
-# MoneyTransfer Project State
+# MoneyTransfer V8.2.0 canonical project state
 
-This file exists so a new ChatGPT conversation can continue the project without re-discovering the update architecture.
+Desktop is LOCAL-FIRST. SQLite on the client is the single source for operations, balances, customer debts, pending transfers, operation log, account statements, reports, reconciliation and shift closing. Internet and the local API server are optional for these desktop functions.
 
-## Current stable state
-- V8.0.1.1 updater bridge was successfully installed on the real application.
-- V8.0.2 was then successfully installed online on the real application.
-- Online update detection, SHA-256 verification, install, restart, and version registration are working.
-- V8.0.2 spinner behavior: amount and commission controls have arrows on the left for +/-1.000 and arrows on the right for +/-0.050; values never go below zero; commission starts blank.
+Official feed:
+https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/latest.json
 
-## V8.0.3 FINAL branding prepared
-- Final app version prepared locally: V8.0.3 Stable.
-- Approved visual direction: modern navy/teal financial-management login interface based on the generated branding mockup.
-- Login screen now uses the approved visual identity panel and a live interactive login form.
-- Developer shown as: أنس العمران.
-- Developer contact email is embedded in the app login and sidebar.
-- Developer phone is embedded in the app login and sidebar.
-- Sidebar developer email and phone are clickable.
-- Final source reads version from `version.json` using `app_version`.
-- Fresh commercial DB remains zeroed for transactions/customers; owner-only tools and private RSA key must never ship with client builds.
+Update ordering uses monotonically increasing `sequence`; V8.2.0 = 802000. Never decrease or reuse it. Updater accepts legacy package_url+sha256 or direct `files` entries (path,url,sha256), allowing future Python/JSON updates to be published directly to GitHub without manually uploading a release ZIP.
 
-## V8.0.3 local artifacts prepared
-- `MoneyTransfer_Update_V8_0_3_FINAL_Branding.zip`
-  - contains only update manifest, version.json, desktop source, and text-encoded login branding asset.
-  - contains no SQLite database, client data, license.json, or owner private key.
-  - SHA-256: `1fb4a6ff642dce08c1b8d4321d9ef0757b6a83c2c27060373f49200cb4c7264a`
-- `MoneyTransfer_Setup_Builder_V8_0_3_FINAL.zip`
-  - Windows one-click builder that produces `installer_output\MoneyTransfer_Setup_V8_0_3_FINAL.exe`.
-  - SHA-256: `3c4dffc8f353851628fa0e6f4ce4c31269a9e70c33a59147689d0ea604cc7b02`
+Licensing is RSA signed and verified locally. Client includes the public key only. Seller private key stays in the private Owner Control Center. Enforced expired/invalid licenses are read-only for financial writes; viewing, reports, settings and backups remain available.
 
-## Important V8.0.1.1 lessons already fixed
-- A bridge package initially omitted the visible-version file, then used the wrong `version` field.
-- MoneyTransfer reads `app_version`; incorrect version metadata caused the UI to fall back to V7.36.0.
-- R3 fixed this using the correct `app_version` schema and an immutable package filename.
-- Never reuse a release ZIP filename after changing its contents; publish a new immutable filename to avoid raw/CDN cache SHA mismatches.
+Accounting invariants:
+- Incoming: selected source/counter decreases, selected electronic destination increases.
+- Outgoing: selected electronic source decreases, selected counter/destination increases.
+- Pending receipt: electronic destination increases immediately; counter/cash unchanged until settlement.
+- Pending settlement: counter/cash decreases at delivery; commission belongs to settlement shift.
+- Debt add: customer debt +amount; selected account -amount.
+- Debt repayment: customer debt -amount; selected account +amount.
+- Accounting-only rows must not inflate commercial volume.
 
-## Update rules
-- Do not disable SHA-256 verification.
-- Do not include SQLite databases, client balances, `license.json`, or private owner keys in update ZIPs.
-- Preserve client data and license during updates.
-- Stable updater source is pinned inside the client to the official repository `latest.json`.
-- Prefer GitHub Actions-generated ZIPs from text sources/patches over direct binary uploads through the connector.
-- Every release must use `version.json` with `app_version`, `api_compatibility`, `runtime_version`, `schema_version`, and `channel`.
-- Every changed release package should use a new immutable filename.
+Update safety:
+- Never replace `financial_pos.db`, server data, `license.json`, `installation.json` or backups.
+- Keep TLS verification and SHA-256 verification enabled.
+- Stable feed is always the official GitHub feed.
+- Future normal source updates should prefer direct-files publishing under `updates/<version>/...` plus a new `latest.json` with a higher `sequence`.
+- Do not change `latest.json` to an untested build.
 
-## Commercial release gates before delivery
-- Re-check license enforcement on a fresh commercial install.
-- Re-check expired-license read-only mode.
-- Re-check renewal and clock rollback protection.
-- Re-check backup/rollback and reset permissions.
-- Confirm fresh-install first launch and login UI.
-- Confirm a full online update cycle preserves data and license.
-- Never ship the private Owner Control Center or private RSA key to clients.
+Current local RC artifacts prepared on 2026-09-01:
+- `MoneyTransfer_Update_V8_2_0_FULL_STABILITY.zip`
+- `MoneyTransfer_FULL_DEVELOPMENT_V8_2_0_FINAL_RC.zip`
+- Static Python compile: PASS
+- Static regression checks: PASS
+- Seed SQLite integrity: PASS
+- Windows GUI/installer/client migration still require laptop validation before customer delivery.
 
-## Owner Control Center
-- Keep it private and separate from client distribution.
-- It tracks products, customer/business details, phone/email, installation ID, plan, expiry, notes, activation token, renewal history, and owner-signed password reset tokens.
+Owner Control Center remains private and separate. Never ship seller private RSA key or owner-only control tools with client builds.
