@@ -2,11 +2,11 @@
   "product": "MoneyTransfer",
   "version": "8.0.1.1",
   "channel": "Stable",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge_R2.zip",
-  "sha256": "a5b122ece559c765915406a22a109176ca7a6dff5ce7f5db05fea385e708a369",
+  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge_R3.zip",
+  "sha256": "ef9a5eed0df029da9c3a9c1cf7c383dbf7ec9a1c917f3f893da214724edec691",
   "notes_ar": [
-    "إصلاح تسجيل رقم الإصدار بعد التحديث.",
-    "حزمة R2 باسم جديد لمنع استخدام نسخة مخزنة مؤقتاً.",
+    "إصلاح نهائي لمصدر رقم الإصدار باستخدام app_version الصحيح.",
+    "يعيد الإصدار الظاهر من القيمة الاحتياطية القديمة إلى V8.0.1.1.",
     "لا يغيّر الأرصدة أو العمليات أو قاعدة البيانات."
   ]
 }
