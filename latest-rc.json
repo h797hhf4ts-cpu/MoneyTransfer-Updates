@@ -1,12 +1,14 @@
 {
   "product": "MoneyTransfer",
-  "version": "8.0.2",
+  "version": "8.0.4",
   "channel": "Candidate",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_2_TEST_Spinner.zip",
-  "sha256": "e1608c69a8d9f28ee3dc59d1326ee04364dc18004465c3d4ae17c426b5ef8701",
+  "package_url": "https://github.com/h797hhf4ts-cpu/MoneyTransfer-Updates/releases/download/v8.0.4-rc1/MoneyTransfer_Update_V8_0_4_PENDING_RC1.zip",
+  "sha256": "ddf08761362e049ffbccff1dc2d770254d42185a61e9cec9178e335e3124aeb0",
   "notes_ar": [
-    "اختبار تحديث الإنترنت V8.0.2.",
-    "إضافة أسهم للمبلغ والعمولة: اليسار +/-1.000 واليمين +/-0.050.",
-    "القيمة لا تنخفض عن صفر، والعمولة تبقى فارغة عند فتح العملية."
+    "نسخة اختبار V8.0.4 RC1 للحوالات الواردة المعلقة.",
+    "تسجيل وصول الحوالة إلى البنك أو المحفظة دون خصم الكاش حتى التسليم.",
+    "تسوية الحوالة لاحقاً مع تسجيل الموظف والوردية وتاريخ التسليم.",
+    "احتساب عمولة التسليم مع دعم خصمها من مبلغ الحوالة أو دفعها بشكل منفصل.",
+    "إضافة الحوالات المعلقة والمسوّاة إلى كشوفات الوردية والتقارير."
   ]
 }
