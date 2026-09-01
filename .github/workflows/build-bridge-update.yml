@@ -34,19 +34,28 @@ jobs:
           JSON
           cat > bridge_build/version.json <<'JSON'
           {
-            "product": "MoneyTransfer",
-            "version": "8.0.1.1",
-            "channel": "Stable",
-            "api_version": "7.26.2",
-            "schema_version": 6
+            "app_version": "8.0.1.1",
+            "api_compatibility": "7.26.2",
+            "runtime_version": "8.0.1.1",
+            "schema_version": 6,
+            "channel": "Stable"
           }
           JSON
-          PKG='releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge_R2.zip'
+          PKG='releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge_R3.zip'
           (
             cd bridge_build
             zip -q -9 ../$PKG update_manifest.json version.json update_engine_v2.py
           )
           unzip -l "$PKG" | grep -q 'version.json'
+          python - <<'PY'
+          import json, zipfile
+          p='releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge_R3.zip'
+          with zipfile.ZipFile(p) as z:
+              v=json.loads(z.read('version.json').decode('utf-8'))
+          assert v['app_version']=='8.0.1.1'
+          assert v['runtime_version']=='8.0.1.1'
+          assert v['api_compatibility']=='7.26.2'
+          PY
           test "$(stat -c%s "$PKG")" -gt 3000
           SHA="$(sha256sum "$PKG" | awk '{print $1}')"
           python - "$SHA" <<'PY'
@@ -56,11 +65,11 @@ jobs:
             "product":"MoneyTransfer",
             "version":"8.0.1.1",
             "channel":"Stable",
-            "package_url":"https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge_R2.zip",
+            "package_url":"https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge_R3.zip",
             "sha256":sha,
             "notes_ar":[
-              "إصلاح تسجيل رقم الإصدار بعد التحديث.",
-              "حزمة R2 باسم جديد لمنع استخدام نسخة مخزنة مؤقتاً.",
+              "إصلاح نهائي لمصدر رقم الإصدار باستخدام app_version الصحيح.",
+              "يعيد الإصدار الظاهر من القيمة الاحتياطية القديمة إلى V8.0.1.1.",
               "لا يغيّر الأرصدة أو العمليات أو قاعدة البيانات."
             ]
           }
@@ -73,6 +82,6 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge_R2.zip latest.json bridge_publish
-          git commit -m "Publish immutable MoneyTransfer updater bridge R2"
+          git add releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge_R3.zip latest.json bridge_publish
+          git commit -m "Publish corrected MoneyTransfer updater bridge R3"
           git push
