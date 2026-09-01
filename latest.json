@@ -1,16 +1,16 @@
 {
   "product": "MoneyTransfer",
-  "version": "7.93.0",
+  "version": "7.94.0",
   "channel": "ReleaseCandidate",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_93_0_V8_Readiness_Final_Gate.zip",
-  "sha256": "df0ffcf77765b3a9f578f034375e32f1d022943c0c19567e39213bed3413b406",
+  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_94_0_Automatic_Verified_Backup_Gate_Fix.zip",
+  "sha256": "c3cdaae58b8119698b72ea430f7112ec2403da9ae5c8b3da19d1a1a2c5ff2ff1",
   "notes_ar": [
-    "V8 Readiness Final Gate يعالج آخر نقاط فحص الجاهزية المكتشفة قبل V8.0.",
-    "تصحيح فحص سلامة القيود حتى لا يصنف تسوية الرصيد والرصيد الافتتاحي ومطابقة الوردية كأخطاء تحويلات.",
-    "إضافة زر تجهيز آمن لـ V8 ينشئ نسخة احتياطية للسيرفر تلقائياً عند الحاجة ثم يتحقق منها ويعيد الفحص.",
-    "النسخة الاحتياطية تتحقق من سلامة SQLite وتستخدم SHA-256 ضمن مسار الجاهزية.",
-    "لا يتم تعديل الأرصدة أو العمليات المالية تلقائياً أثناء التجهيز أو الفحص.",
+    "Automatic Verified Backup Gate Fix يعالج آخر نقطتي Backup في مركز جاهزية V8.",
+    "إنشاء نسخة احتياطية متسقة من اتصال SQLite الحي المستخدم بواسطة السيرفر.",
+    "حفظ النسخة الاحتياطية بشكل ذري والتحقق منها باستخدام SHA-256 وSQLite integrity_check قبل اعتمادها.",
+    "مركز جاهزية V8 ينشئ نسخة احتياطية تلقائياً عند عدم وجود نسخة سليمة ثم يعيد تقييم الجاهزية.",
+    "لا يتم تعديل الأرصدة أو العمليات المالية أثناء النسخ أو الفحص.",
     "الحفاظ على API Compatibility 7.26.2 وSchema 6 وقناة ReleaseCandidate.",
-    "لا تحتوي الحزمة على قاعدة بيانات أو أرصدة أو عمليات مالية."
+    "لا تحتوي حزمة التحديث على قاعدة بيانات أو أرصدة أو عمليات مالية."
   ]
 }
