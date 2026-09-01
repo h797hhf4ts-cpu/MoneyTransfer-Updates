@@ -1,0 +1,67 @@
+name: Publish MoneyTransfer updater bridge
+
+on:
+  push:
+    paths:
+      - 'bridge_publish/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build verified updater bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf bridge_build
+          mkdir -p bridge_build releases
+          cp bridge/update_engine_v2.py bridge_build/update_engine_v2.py
+          python -m py_compile bridge_build/update_engine_v2.py
+          cat > bridge_build/update_manifest.json <<'JSON'
+          {
+            "manifest_version": 2,
+            "product": "MoneyTransfer",
+            "version": "8.0.1.1",
+            "api_version": "7.26.2",
+            "schema_version": 6,
+            "channel": "Stable",
+            "description": "Updater bridge enabling verified deterministic text patches"
+          }
+          JSON
+          (
+            cd bridge_build
+            zip -q -9 ../releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge.zip update_manifest.json update_engine_v2.py
+          )
+          test "$(stat -c%s releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge.zip)" -gt 3000
+          SHA="$(sha256sum releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge.zip | awk '{print $1}')"
+          python - "$SHA" <<'PY'
+          import json,sys
+          sha=sys.argv[1]
+          data={
+            "product":"MoneyTransfer",
+            "version":"8.0.1.1",
+            "channel":"Stable",
+            "package_url":"https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge.zip",
+            "sha256":sha,
+            "notes_ar":[
+              "تحديث تمهيدي آمن لمحرك التحديث.",
+              "لا يغيّر الأرصدة أو العمليات أو قاعدة البيانات.",
+              "يضيف دعماً لتحديثات نصية متحققة قبل استبدال ملفات البرنامج."
+            ]
+          }
+          open('latest.json','w',encoding='utf-8').write(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+          PY
+          rm -rf bridge_build bridge_publish
+      - name: Commit verified bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge.zip latest.json bridge_publish
+          git commit -m "Publish verified MoneyTransfer updater bridge"
+          git push
