@@ -1,0 +1,19 @@
+{
+  "patches": [
+    {
+      "path": "desktop/financial_transfer_system_v7_9_0.py",
+      "replacements": [
+        {
+          "old": "        amount_e=ttk.Entry(amount_box,textvariable=amount_var,justify=\"center\",font=(\"Consolas\",14))\n        amount_e.pack(fill=\"x\",padx=10,pady=(2,6),ipady=3)\n",
+          "new": "        # V8.0.2 TEST: dual precision steppers.\n        # Left arrows change whole dinars (+/- 1.000); right arrows change fractions (+/- 0.050).\n        def step_money(var, delta):\n            raw=(var.get() or \"\").strip()\n            try:\n                current=self.parse_number(raw) if raw else 0.0\n            except Exception:\n                current=0.0\n            new_value=max(0.0, round(current + delta, 3))\n            var.set(f\"{new_value:.3f}\")\n\n        amount_input=tk.Frame(amount_box,bg=\"#F8FAFC\")\n        amount_input.pack(fill=\"x\",padx=10,pady=(2,6))\n        amount_left=tk.Frame(amount_input,bg=\"#F8FAFC\")\n        amount_left.pack(side=\"left\",padx=(0,5))\n        tk.Button(amount_left,text=\"▲\",width=2,command=lambda:step_money(amount_var,1.000),\n                  relief=\"flat\",bd=0,cursor=\"hand2\").pack(side=\"top\")\n        tk.Button(amount_left,text=\"▼\",width=2,command=lambda:step_money(amount_var,-1.000),\n                  relief=\"flat\",bd=0,cursor=\"hand2\").pack(side=\"top\")\n        amount_right=tk.Frame(amount_input,bg=\"#F8FAFC\")\n        amount_right.pack(side=\"right\",padx=(5,0))\n        tk.Button(amount_right,text=\"▲\",width=2,command=lambda:step_money(amount_var,0.050),\n                  relief=\"flat\",bd=0,cursor=\"hand2\").pack(side=\"top\")\n        tk.Button(amount_right,text=\"▼\",width=2,command=lambda:step_money(amount_var,-0.050),\n                  relief=\"flat\",bd=0,cursor=\"hand2\").pack(side=\"top\")\n        amount_e=ttk.Entry(amount_input,textvariable=amount_var,justify=\"center\",font=(\"Consolas\",14))\n        amount_e.pack(side=\"left\",fill=\"x\",expand=True,ipady=3)\n",
+          "count": 1
+        },
+        {
+          "old": "            comm_e=ttk.Entry(comm_box,textvariable=comm_var,justify=\"center\",font=(\"Consolas\",14))\n            comm_e.pack(fill=\"x\",padx=10,pady=(2,6),ipady=3)\n",
+          "new": "            comm_input=tk.Frame(comm_box,bg=\"#F8FAFC\")\n            comm_input.pack(fill=\"x\",padx=10,pady=(2,6))\n            comm_left=tk.Frame(comm_input,bg=\"#F8FAFC\")\n            comm_left.pack(side=\"left\",padx=(0,5))\n            tk.Button(comm_left,text=\"▲\",width=2,command=lambda:step_money(comm_var,1.000),\n                      relief=\"flat\",bd=0,cursor=\"hand2\").pack(side=\"top\")\n            tk.Button(comm_left,text=\"▼\",width=2,command=lambda:step_money(comm_var,-1.000),\n                      relief=\"flat\",bd=0,cursor=\"hand2\").pack(side=\"top\")\n            comm_right=tk.Frame(comm_input,bg=\"#F8FAFC\")\n            comm_right.pack(side=\"right\",padx=(5,0))\n            tk.Button(comm_right,text=\"▲\",width=2,command=lambda:step_money(comm_var,0.050),\n                      relief=\"flat\",bd=0,cursor=\"hand2\").pack(side=\"top\")\n            tk.Button(comm_right,text=\"▼\",width=2,command=lambda:step_money(comm_var,-0.050),\n                      relief=\"flat\",bd=0,cursor=\"hand2\").pack(side=\"top\")\n            comm_e=ttk.Entry(comm_input,textvariable=comm_var,justify=\"center\",font=(\"Consolas\",14))\n            comm_e.pack(side=\"left\",fill=\"x\",expand=True,ipady=3)\n",
+          "count": 1
+        }
+      ]
+    }
+  ]
+}
