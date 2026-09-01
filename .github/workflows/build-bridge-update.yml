@@ -32,10 +32,20 @@ jobs:
             "description": "Updater bridge enabling verified deterministic text patches"
           }
           JSON
+          cat > bridge_build/version.json <<'JSON'
+          {
+            "product": "MoneyTransfer",
+            "version": "8.0.1.1",
+            "channel": "Stable",
+            "api_version": "7.26.2",
+            "schema_version": 6
+          }
+          JSON
           (
             cd bridge_build
-            zip -q -9 ../releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge.zip update_manifest.json update_engine_v2.py
+            zip -q -9 ../releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge.zip update_manifest.json version.json update_engine_v2.py
           )
+          unzip -l releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge.zip | grep -q 'version.json'
           test "$(stat -c%s releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge.zip)" -gt 3000
           SHA="$(sha256sum releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge.zip | awk '{print $1}')"
           python - "$SHA" <<'PY'
@@ -48,9 +58,9 @@ jobs:
             "package_url":"https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge.zip",
             "sha256":sha,
             "notes_ar":[
+              "إصلاح تسجيل رقم الإصدار بعد التحديث.",
               "تحديث تمهيدي آمن لمحرك التحديث.",
-              "لا يغيّر الأرصدة أو العمليات أو قاعدة البيانات.",
-              "يضيف دعماً لتحديثات نصية متحققة قبل استبدال ملفات البرنامج."
+              "لا يغيّر الأرصدة أو العمليات أو قاعدة البيانات."
             ]
           }
           open('latest.json','w',encoding='utf-8').write(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
@@ -63,5 +73,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge.zip latest.json bridge_publish
-          git commit -m "Publish verified MoneyTransfer updater bridge"
+          git commit -m "Publish fixed MoneyTransfer updater bridge"
           git push
