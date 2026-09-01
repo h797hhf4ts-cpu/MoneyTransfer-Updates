@@ -31,32 +31,45 @@ jobs:
       - name: Extract base and apply audited patch
         shell: bash
         run: |
-          set -euo pipefail
+          set -uo pipefail
           rm -rf v804_extract v804_build
-          mkdir -p v804_extract v804_build
-          innoextract --silent --output-dir v804_extract base_installer/MoneyTransfer_Setup_V8_0_3_FINAL.exe
+          mkdir -p v804_extract v804_build patch_v804
+          : > patch_v804/diagnostics.txt
+          if ! innoextract --silent --output-dir v804_extract base_installer/MoneyTransfer_Setup_V8_0_3_FINAL.exe >>patch_v804/diagnostics.txt 2>&1; then
+            echo 'INNOEXTRACT_FAILED' >> patch_v804/diagnostics.txt
+            exit 11
+          fi
+          echo '--- extracted files ---' >> patch_v804/diagnostics.txt
+          find v804_extract -maxdepth 5 -type f | sort | sed -n '1,240p' >> patch_v804/diagnostics.txt
           DESKTOP_FILE="$(find v804_extract -type f -path '*/desktop/financial_transfer_system_v7_9_0.py' | head -n1)"
-          test -n "$DESKTOP_FILE"
+          if [ -z "$DESKTOP_FILE" ]; then echo 'DESKTOP_FILE_NOT_FOUND' >> patch_v804/diagnostics.txt; exit 12; fi
           APP_ROOT="${DESKTOP_FILE%/desktop/financial_transfer_system_v7_9_0.py}"
-          test -f "$APP_ROOT/server_runtime/services/transaction_service.py"
-          test -f "$APP_ROOT/server_runtime/app.py"
-          test -f "$APP_ROOT/server_runtime/migrations.py"
-          test -f "$APP_ROOT/version.json"
-          printf '%s\n' "$APP_ROOT" > v804_app_root.txt
+          echo "APP_ROOT=$APP_ROOT" >> patch_v804/diagnostics.txt
+          for f in desktop/financial_transfer_system_v7_9_0.py server_runtime/services/transaction_service.py server_runtime/app.py server_runtime/migrations.py version.json; do
+            if [ ! -f "$APP_ROOT/$f" ]; then echo "MISSING=$f" >> patch_v804/diagnostics.txt; exit 13; fi
+            sha256sum "$APP_ROOT/$f" >> patch_v804/diagnostics.txt
+          done
           python - <<'PY'
           import base64,zlib,pathlib
           raw=pathlib.Path('patch_v804/update.patch.zlib.b64').read_text(encoding='ascii').strip()
           pathlib.Path('patch_v804/update.patch').write_bytes(zlib.decompress(base64.b64decode(raw)))
           PY
-          (cd "$APP_ROOT" && patch -p1 --fuzz=0 < "$GITHUB_WORKSPACE/patch_v804/update.patch")
+          echo '--- patch dry run ---' >> patch_v804/diagnostics.txt
+          if ! (cd "$APP_ROOT" && patch --dry-run -p1 --fuzz=0 < "$GITHUB_WORKSPACE/patch_v804/update.patch") >>patch_v804/diagnostics.txt 2>&1; then
+            echo 'PATCH_DRY_RUN_FAILED' >> patch_v804/diagnostics.txt
+            exit 14
+          fi
+          (cd "$APP_ROOT" && patch -p1 --fuzz=0 < "$GITHUB_WORKSPACE/patch_v804/update.patch") >>patch_v804/diagnostics.txt 2>&1 || exit 15
+          printf '%s\n' "$APP_ROOT" > v804_app_root.txt
           python -m py_compile \
             "$APP_ROOT/desktop/financial_transfer_system_v7_9_0.py" \
             "$APP_ROOT/server_runtime/services/transaction_service.py" \
             "$APP_ROOT/server_runtime/app.py" \
-            "$APP_ROOT/server_runtime/migrations.py"
-          grep -q '"app_version": "8.0.4"' "$APP_ROOT/version.json"
-          grep -q 'CREATE TABLE IF NOT EXISTS pending_transfers' "$APP_ROOT/desktop/financial_transfer_system_v7_9_0.py"
-          grep -q 'حوالة واردة معلقة' "$APP_ROOT/server_runtime/services/transaction_service.py"
+            "$APP_ROOT/server_runtime/migrations.py" || exit 16
+          grep -q '"app_version": "8.0.4"' "$APP_ROOT/version.json" || exit 17
+          grep -q 'CREATE TABLE IF NOT EXISTS pending_transfers' "$APP_ROOT/desktop/financial_transfer_system_v7_9_0.py" || exit 18
+          grep -q 'حوالة واردة معلقة' "$APP_ROOT/server_runtime/services/transaction_service.py" || exit 19
+          echo 'PATCH_AND_COMPILE_OK' >> patch_v804/diagnostics.txt
 
       - name: Build full-file updater package
         shell: bash
@@ -113,6 +126,18 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add releases/MoneyTransfer_Update_V8_0_4_Pending_Transfers_R1.zip patch_v804/latest-v804.json patch_v804_publish
+          git add releases/MoneyTransfer_Update_V8_0_4_Pending_Transfers_R1.zip patch_v804/latest-v804.json patch_v804/diagnostics.txt patch_v804_publish
           git commit -m "Build verified MoneyTransfer V8.0.4 pending transfers R1"
           git push
+
+      - name: Commit diagnostics on failure
+        if: failure()
+        shell: bash
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          test -f patch_v804/diagnostics.txt || echo 'No diagnostics file was produced' > patch_v804/diagnostics.txt
+          git add patch_v804/diagnostics.txt
+          git commit -m "Record V8.0.4 build diagnostics" || true
+          git push || true
