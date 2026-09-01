@@ -1,0 +1,46 @@
+name: Publish MoneyTransfer V8.0.2 verified update
+
+on:
+  push:
+    paths:
+      - 'v802_payload/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild and verify V8.0.2
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p releases
+          cat v802_payload/chunk*.txt | base64 -d > releases/MoneyTransfer_Update_V8_0_2_TEST_Spinner.zip
+          test "$(stat -c%s releases/MoneyTransfer_Update_V8_0_2_TEST_Spinner.zip)" = "106986"
+          echo "e1608c69a8d9f28ee3dc59d1326ee04364dc18004465c3d4ae17c426b5ef8701  releases/MoneyTransfer_Update_V8_0_2_TEST_Spinner.zip" | sha256sum -c -
+          cat > latest.json <<'JSON'
+          {
+            "product": "MoneyTransfer",
+            "version": "8.0.2",
+            "channel": "Stable",
+            "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_2_TEST_Spinner.zip",
+            "sha256": "e1608c69a8d9f28ee3dc59d1326ee04364dc18004465c3d4ae17c426b5ef8701",
+            "notes_ar": [
+              "اختبار تحديث الإنترنت V8.0.2.",
+              "إضافة أسهم للمبلغ والعمولة: اليسار +/-1.000 واليمين +/-0.050.",
+              "القيمة لا تنخفض عن صفر، والعمولة تبقى فارغة عند فتح العملية."
+            ]
+          }
+          JSON
+          rm -rf v802_payload
+      - name: Commit verified update
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add releases/MoneyTransfer_Update_V8_0_2_TEST_Spinner.zip latest.json v802_payload
+          git commit -m "Publish verified MoneyTransfer V8.0.2 update"
+          git push
