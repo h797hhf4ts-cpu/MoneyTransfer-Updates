@@ -1,17 +1,12 @@
 {
   "product": "MoneyTransfer",
-  "version": "8.0.0",
+  "version": "8.0.2",
   "channel": "Stable",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_0_Commercial_Complete.zip",
-  "sha256": "6fa3bae61931c6416c1aa47827e5fd681b5d20492b6c6eebf94bd46dfb845653",
+  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_2_TEST_Spinner.zip",
+  "sha256": "e1608c69a8d9f28ee3dc59d1326ee04364dc18004465c3d4ae17c426b5ef8701",
   "notes_ar": [
-    "V8.0.0 Commercial Complete أصبح الإصدار التجاري المستقر الرسمي.",
-    "فحص تلقائي للتحديثات بعد تشغيل البرنامج مع فحص دوري قابل للضبط، والمصدر الرسمي مثبت داخل البرنامج لتسهيل الأجهزة الجديدة.",
-    "تنزيل التحديثات مع التحقق من SHA-256 والاستفادة من النسخ الاحتياطي والرجوع عند فشل التطبيق.",
-    "إضافة أساس التفعيل التجاري Offline المرتبط بمعرف التثبيت مع فترة تجربة للتثبيتات التجارية الجديدة.",
-    "استمرار النسخ الاحتياطي المتحقق منه باستخدام SHA-256 وSQLite integrity_check.",
-    "الحفاظ على بيانات المستخدم الحالية وعدم تضمين أي قاعدة بيانات أو أرصدة أو عمليات مالية في حزمة التحديث.",
-    "الهاتف الحالي Mobile Web/PWA وليس تطبيقات iOS/Android موقعة للمتاجر.",
-    "هذه القناة Stable هي القناة الرسمية للتحديثات التجارية القادمة."
+    "اختبار تحديث الإنترنت V8.0.2.",
+    "إضافة أسهم للمبلغ والعمولة: اليسار +/-1.000 واليمين +/-0.050.",
+    "القيمة لا تنخفض عن صفر، والعمولة تبقى فارغة عند فتح العملية."
   ]
 }
