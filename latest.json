@@ -1,14 +1,14 @@
 {
   "product": "MoneyTransfer",
-  "version": "8.0.2",
+  "version": "8.0.4",
   "channel": "Stable",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_2_Spinner_R2.zip",
-  "sha256": "1e17a19e5f1c08e34f5e9811d3bc61d39834fd014ce2dd4531a1b4ef2fcae760",
+  "package_url": "https://github.com/h797hhf4ts-cpu/MoneyTransfer-Updates/releases/download/v8.0.4-rc1/MoneyTransfer_Update_V8_0_4_PENDING_RC1.zip",
+  "sha256": "ddf08761362e049ffbccff1dc2d770254d42185a61e9cec9178e335e3124aeb0",
   "notes_ar": [
-    "إضافة أسهم للمبلغ والعمولة.",
-    "الأسهم اليسرى تزيد أو تنقص 1.000.",
-    "الأسهم اليمنى تزيد أو تنقص 0.050.",
-    "القيمة لا تنخفض عن صفر، والعمولة تبقى فارغة عند فتح العملية.",
-    "حزمة باسم ثابت جديد لمنع مشاكل التخزين المؤقت."
+    "إضافة الحوالات الواردة المعلقة التي تصل للحساب الإلكتروني قبل تسليم النقد.",
+    "عدم خصم الكاش عند وصول الحوالة المعلقة؛ الخصم يتم عند التسليم.",
+    "استمرار الحوالات المعلقة بين الأيام والورديات حتى التسوية.",
+    "احتساب عمولة التسليم مع دعم خصمها من مبلغ الحوالة أو دفعها بشكل منفصل.",
+    "ربط التسوية بالموظف والوردية وإظهارها في الكشوفات والتقارير."
   ]
 }
