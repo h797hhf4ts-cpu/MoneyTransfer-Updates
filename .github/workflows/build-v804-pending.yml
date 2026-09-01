@@ -34,37 +34,41 @@ jobs:
           set -euo pipefail
           rm -rf v804_extract v804_build
           mkdir -p v804_extract v804_build
-          innoextract -q -d v804_extract base_installer/MoneyTransfer_Setup_V8_0_3_FINAL.exe
-          test -f v804_extract/app/desktop/financial_transfer_system_v7_9_0.py
-          test -f v804_extract/app/server_runtime/services/transaction_service.py
-          test -f v804_extract/app/server_runtime/app.py
-          test -f v804_extract/app/server_runtime/migrations.py
-          test -f v804_extract/app/version.json
+          innoextract --silent --output-dir v804_extract base_installer/MoneyTransfer_Setup_V8_0_3_FINAL.exe
+          DESKTOP_FILE="$(find v804_extract -type f -path '*/desktop/financial_transfer_system_v7_9_0.py' | head -n1)"
+          test -n "$DESKTOP_FILE"
+          APP_ROOT="${DESKTOP_FILE%/desktop/financial_transfer_system_v7_9_0.py}"
+          test -f "$APP_ROOT/server_runtime/services/transaction_service.py"
+          test -f "$APP_ROOT/server_runtime/app.py"
+          test -f "$APP_ROOT/server_runtime/migrations.py"
+          test -f "$APP_ROOT/version.json"
+          printf '%s\n' "$APP_ROOT" > v804_app_root.txt
           python - <<'PY'
           import base64,zlib,pathlib
           raw=pathlib.Path('patch_v804/update.patch.zlib.b64').read_text(encoding='ascii').strip()
           pathlib.Path('patch_v804/update.patch').write_bytes(zlib.decompress(base64.b64decode(raw)))
           PY
-          (cd v804_extract/app && patch -p1 --fuzz=0 < ../../patch_v804/update.patch)
+          (cd "$APP_ROOT" && patch -p1 --fuzz=0 < "$GITHUB_WORKSPACE/patch_v804/update.patch")
           python -m py_compile \
-            v804_extract/app/desktop/financial_transfer_system_v7_9_0.py \
-            v804_extract/app/server_runtime/services/transaction_service.py \
-            v804_extract/app/server_runtime/app.py \
-            v804_extract/app/server_runtime/migrations.py
-          grep -q '"app_version": "8.0.4"' v804_extract/app/version.json
-          grep -q 'CREATE TABLE IF NOT EXISTS pending_transfers' v804_extract/app/desktop/financial_transfer_system_v7_9_0.py
-          grep -q 'حوالة واردة معلقة' v804_extract/app/server_runtime/services/transaction_service.py
+            "$APP_ROOT/desktop/financial_transfer_system_v7_9_0.py" \
+            "$APP_ROOT/server_runtime/services/transaction_service.py" \
+            "$APP_ROOT/server_runtime/app.py" \
+            "$APP_ROOT/server_runtime/migrations.py"
+          grep -q '"app_version": "8.0.4"' "$APP_ROOT/version.json"
+          grep -q 'CREATE TABLE IF NOT EXISTS pending_transfers' "$APP_ROOT/desktop/financial_transfer_system_v7_9_0.py"
+          grep -q 'حوالة واردة معلقة' "$APP_ROOT/server_runtime/services/transaction_service.py"
 
       - name: Build full-file updater package
         shell: bash
         run: |
           set -euo pipefail
+          APP_ROOT="$(cat v804_app_root.txt)"
           mkdir -p v804_build/desktop v804_build/server_runtime/services releases
-          cp v804_extract/app/desktop/financial_transfer_system_v7_9_0.py v804_build/desktop/
-          cp v804_extract/app/server_runtime/app.py v804_build/server_runtime/
-          cp v804_extract/app/server_runtime/migrations.py v804_build/server_runtime/
-          cp v804_extract/app/server_runtime/services/transaction_service.py v804_build/server_runtime/services/
-          cp v804_extract/app/version.json v804_build/version.json
+          cp "$APP_ROOT/desktop/financial_transfer_system_v7_9_0.py" v804_build/desktop/
+          cp "$APP_ROOT/server_runtime/app.py" v804_build/server_runtime/
+          cp "$APP_ROOT/server_runtime/migrations.py" v804_build/server_runtime/
+          cp "$APP_ROOT/server_runtime/services/transaction_service.py" v804_build/server_runtime/services/
+          cp "$APP_ROOT/version.json" v804_build/version.json
           cat > v804_build/update_manifest.json <<'JSON'
           {
             "manifest_version": 2,
@@ -101,7 +105,7 @@ jobs:
           }
           pathlib.Path('patch_v804/latest-v804.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           PY
-          rm -rf patch_v804_publish v804_build v804_extract base_installer patch_v804/update.patch
+          rm -rf patch_v804_publish v804_build v804_extract base_installer patch_v804/update.patch v804_app_root.txt
 
       - name: Commit verified V8.0.4 package
         shell: bash
