@@ -14,11 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install extractor
+      - name: Install extractors
         run: |
           set -euo pipefail
           sudo apt-get update -qq
-          sudo apt-get install -y -qq innoextract
+          sudo apt-get install -y -qq innoextract p7zip-full
 
       - name: Download V8.0.3 final installer
         env:
@@ -36,14 +36,19 @@ jobs:
           mkdir -p v804_extract v804_build patch_v804
           : > patch_v804/diagnostics.txt
           if ! innoextract --silent --output-dir v804_extract base_installer/MoneyTransfer_Setup_V8_0_3_FINAL.exe >>patch_v804/diagnostics.txt 2>&1; then
-            echo 'INNOEXTRACT_FAILED' >> patch_v804/diagnostics.txt
-            exit 11
+            echo 'INNOEXTRACT_FAILED_TRY_7ZIP' >> patch_v804/diagnostics.txt
+            rm -rf v804_extract && mkdir -p v804_extract
+            if ! 7z x -y -ov804_extract base_installer/MoneyTransfer_Setup_V8_0_3_FINAL.exe >>patch_v804/diagnostics.txt 2>&1; then
+              echo 'ALL_EXTRACTORS_FAILED' >> patch_v804/diagnostics.txt
+              exit 11
+            fi
           fi
           echo '--- extracted files ---' >> patch_v804/diagnostics.txt
-          find v804_extract -maxdepth 5 -type f | sort | sed -n '1,240p' >> patch_v804/diagnostics.txt
-          DESKTOP_FILE="$(find v804_extract -type f -path '*/desktop/financial_transfer_system_v7_9_0.py' | head -n1)"
+          find v804_extract -maxdepth 8 -type f | sort | sed -n '1,400p' >> patch_v804/diagnostics.txt
+          DESKTOP_FILE="$(find v804_extract -type f -name 'financial_transfer_system_v7_9_0.py' | head -n1)"
           if [ -z "$DESKTOP_FILE" ]; then echo 'DESKTOP_FILE_NOT_FOUND' >> patch_v804/diagnostics.txt; exit 12; fi
           APP_ROOT="${DESKTOP_FILE%/desktop/financial_transfer_system_v7_9_0.py}"
+          echo "DESKTOP_FILE=$DESKTOP_FILE" >> patch_v804/diagnostics.txt
           echo "APP_ROOT=$APP_ROOT" >> patch_v804/diagnostics.txt
           for f in desktop/financial_transfer_system_v7_9_0.py server_runtime/services/transaction_service.py server_runtime/app.py server_runtime/migrations.py version.json; do
             if [ ! -f "$APP_ROOT/$f" ]; then echo "MISSING=$f" >> patch_v804/diagnostics.txt; exit 13; fi
