@@ -1,12 +1,12 @@
 {
   "product": "MoneyTransfer",
-  "version": "8.0.2",
+  "version": "8.0.1.1",
   "channel": "Stable",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_2_TEST_Spinner.zip",
-  "sha256": "e1608c69a8d9f28ee3dc59d1326ee04364dc18004465c3d4ae17c426b5ef8701",
+  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge.zip",
+  "sha256": "936d6bd6c400a98bbc4ff61cf0b4ebcf45b42ecbedb0cdbf1cc10a2ea1a65961",
   "notes_ar": [
-    "اختبار تحديث الإنترنت V8.0.2.",
-    "إضافة أسهم للمبلغ والعمولة: اليسار +/-1.000 واليمين +/-0.050.",
-    "القيمة لا تنخفض عن صفر، والعمولة تبقى فارغة عند فتح العملية."
+    "تحديث تمهيدي آمن لمحرك التحديث.",
+    "لا يغيّر الأرصدة أو العمليات أو قاعدة البيانات.",
+    "يضيف دعماً لتحديثات نصية متحققة قبل استبدال ملفات البرنامج."
   ]
 }
