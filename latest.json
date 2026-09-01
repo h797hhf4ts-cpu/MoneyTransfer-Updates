@@ -3,10 +3,10 @@
   "version": "8.0.1.1",
   "channel": "Stable",
   "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_1_1_Updater_Bridge.zip",
-  "sha256": "936d6bd6c400a98bbc4ff61cf0b4ebcf45b42ecbedb0cdbf1cc10a2ea1a65961",
+  "sha256": "8e2b37ce40346eb0a37ccf07b7db2b4c44958449740c010c7fd384d6af232458",
   "notes_ar": [
+    "إصلاح تسجيل رقم الإصدار بعد التحديث.",
     "تحديث تمهيدي آمن لمحرك التحديث.",
-    "لا يغيّر الأرصدة أو العمليات أو قاعدة البيانات.",
-    "يضيف دعماً لتحديثات نصية متحققة قبل استبدال ملفات البرنامج."
+    "لا يغيّر الأرصدة أو العمليات أو قاعدة البيانات."
   ]
 }
