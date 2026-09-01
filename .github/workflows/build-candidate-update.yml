@@ -13,20 +13,44 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Rebuild candidate ZIP
+      - name: Build V8.0.2 TEST from RC3 candidate
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p releases
-          cat candidate_payload/chunk*.txt | base64 -d > releases/MoneyTransfer_Update_V8_0_1_RC3_Candidate.zip
-          echo "139f92a9868352eb63117db1aa95f1712ca0dfd8a087b3996671b524993475fd  releases/MoneyTransfer_Update_V8_0_1_RC3_Candidate.zip" | sha256sum -c -
-          cp candidate_payload/latest-rc.json latest-rc.json
+          python - <<'PY'
+          import urllib.request, zipfile, pathlib, shutil, json, hashlib
+          root=pathlib.Path('.')
+          work=root/'candidate_build_802'
+          if work.exists(): shutil.rmtree(work)
+          work.mkdir()
+          base=root/'releases/MoneyTransfer_Update_V8_0_1_RC3_Candidate.zip'
+          if not base.exists():
+              urllib.request.urlretrieve('https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_1_RC3_Candidate.zip', base)
+          with zipfile.ZipFile(base) as z: z.extractall(work)
+          p=work/'desktop/financial_transfer_system_v7_9_0.py'
+          s=p.read_text(encoding='utf-8')
+          old='''        amount_e=ttk.Entry(amount_box,textvariable=amount_var,justify="center",font=("Consolas",14))\n        amount_e.pack(fill="x",padx=10,pady=(2,6),ipady=3)\n'''
+          new='''        def step_money(var, delta):\n            raw=(var.get() or "").strip()\n            try: current=self.parse_number(raw) if raw else 0.0\n            except Exception: current=0.0\n            var.set(f"{max(0.0, round(current + delta, 3)):.3f}")\n        amount_input=tk.Frame(amount_box,bg="#F8FAFC"); amount_input.pack(fill="x",padx=10,pady=(2,6))\n        amount_left=tk.Frame(amount_input,bg="#F8FAFC"); amount_left.pack(side="left",padx=(0,5))\n        tk.Button(amount_left,text="▲",width=2,command=lambda:step_money(amount_var,1.000),relief="flat",bd=0,cursor="hand2").pack(side="top")\n        tk.Button(amount_left,text="▼",width=2,command=lambda:step_money(amount_var,-1.000),relief="flat",bd=0,cursor="hand2").pack(side="top")\n        amount_right=tk.Frame(amount_input,bg="#F8FAFC"); amount_right.pack(side="right",padx=(5,0))\n        tk.Button(amount_right,text="▲",width=2,command=lambda:step_money(amount_var,0.050),relief="flat",bd=0,cursor="hand2").pack(side="top")\n        tk.Button(amount_right,text="▼",width=2,command=lambda:step_money(amount_var,-0.050),relief="flat",bd=0,cursor="hand2").pack(side="top")\n        amount_e=ttk.Entry(amount_input,textvariable=amount_var,justify="center",font=("Consolas",14)); amount_e.pack(side="left",fill="x",expand=True,ipady=3)\n'''
+          oldc='''            comm_e=ttk.Entry(comm_box,textvariable=comm_var,justify="center",font=("Consolas",14))\n            comm_e.pack(fill="x",padx=10,pady=(2,6),ipady=3)\n'''
+          newc='''            comm_input=tk.Frame(comm_box,bg="#F8FAFC"); comm_input.pack(fill="x",padx=10,pady=(2,6))\n            comm_left=tk.Frame(comm_input,bg="#F8FAFC"); comm_left.pack(side="left",padx=(0,5))\n            tk.Button(comm_left,text="▲",width=2,command=lambda:step_money(comm_var,1.000),relief="flat",bd=0,cursor="hand2").pack(side="top")\n            tk.Button(comm_left,text="▼",width=2,command=lambda:step_money(comm_var,-1.000),relief="flat",bd=0,cursor="hand2").pack(side="top")\n            comm_right=tk.Frame(comm_input,bg="#F8FAFC"); comm_right.pack(side="right",padx=(5,0))\n            tk.Button(comm_right,text="▲",width=2,command=lambda:step_money(comm_var,0.050),relief="flat",bd=0,cursor="hand2").pack(side="top")\n            tk.Button(comm_right,text="▼",width=2,command=lambda:step_money(comm_var,-0.050),relief="flat",bd=0,cursor="hand2").pack(side="top")\n            comm_e=ttk.Entry(comm_input,textvariable=comm_var,justify="center",font=("Consolas",14)); comm_e.pack(side="left",fill="x",expand=True,ipady=3)\n'''
+          if old not in s or oldc not in s: raise SystemExit('UI patch target not found')
+          p.write_text(s.replace(old,new,1).replace(oldc,newc,1),encoding='utf-8')
+          vp=work/'version.json'; v=json.loads(vp.read_text(encoding='utf-8')); v['version']='8.0.2'; v['channel']='Candidate'; vp.write_text(json.dumps(v,ensure_ascii=False,indent=2),encoding='utf-8')
+          out=root/'releases/MoneyTransfer_Update_V8_0_2_TEST_Spinner.zip'
+          with zipfile.ZipFile(out,'w',zipfile.ZIP_DEFLATED) as z:
+              for f in work.rglob('*'):
+                  if f.is_file(): z.write(f,f.relative_to(work))
+          sha=hashlib.sha256(out.read_bytes()).hexdigest()
+          manifest={'product':'MoneyTransfer','version':'8.0.2','channel':'Candidate','package_url':'https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_2_TEST_Spinner.zip','sha256':sha,'notes_ar':['اختبار تحديث الإنترنت V8.0.2','أسهم يسار المبلغ والعمولة +/-1.000 وأسهم اليمين +/-0.050','القيمة لا تنخفض عن صفر والعمولة تبقى فارغة عند فتح العملية']}
+          (root/'latest-rc.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
+          shutil.rmtree(work)
+          PY
           rm -rf candidate_payload
       - name: Commit candidate asset
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add releases/MoneyTransfer_Update_V8_0_1_RC3_Candidate.zip latest-rc.json candidate_payload
-          git commit -m "Publish MoneyTransfer V8.0.1 RC3 candidate update"
+          git add releases/MoneyTransfer_Update_V8_0_2_TEST_Spinner.zip latest-rc.json candidate_payload
+          git commit -m "Publish MoneyTransfer V8.0.2 spinner test candidate"
           git push
