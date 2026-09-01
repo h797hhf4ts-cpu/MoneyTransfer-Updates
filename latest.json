@@ -1,16 +1,17 @@
 {
   "product": "MoneyTransfer",
-  "version": "7.94.0",
+  "version": "8.0.0",
   "channel": "ReleaseCandidate",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_94_0_Automatic_Verified_Backup_Gate_Fix.zip",
-  "sha256": "c3cdaae58b8119698b72ea430f7112ec2403da9ae5c8b3da19d1a1a2c5ff2ff1",
+  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_0_Commercial_Complete.zip",
+  "sha256": "6fa3bae61931c6416c1aa47827e5fd681b5d20492b6c6eebf94bd46dfb845653",
   "notes_ar": [
-    "Automatic Verified Backup Gate Fix يعالج آخر نقطتي Backup في مركز جاهزية V8.",
-    "إنشاء نسخة احتياطية متسقة من اتصال SQLite الحي المستخدم بواسطة السيرفر.",
-    "حفظ النسخة الاحتياطية بشكل ذري والتحقق منها باستخدام SHA-256 وSQLite integrity_check قبل اعتمادها.",
-    "مركز جاهزية V8 ينشئ نسخة احتياطية تلقائياً عند عدم وجود نسخة سليمة ثم يعيد تقييم الجاهزية.",
-    "لا يتم تعديل الأرصدة أو العمليات المالية أثناء النسخ أو الفحص.",
-    "الحفاظ على API Compatibility 7.26.2 وSchema 6 وقناة ReleaseCandidate.",
-    "لا تحتوي حزمة التحديث على قاعدة بيانات أو أرصدة أو عمليات مالية."
+    "V8.0.0 Commercial Complete يجمع إصدار سطح المكتب والخادم وMobile Web ونظام التحديث في حزمة تراكمية واحدة.",
+    "إضافة فحص تلقائي للتحديثات بعد تشغيل البرنامج مع فحص دوري قابل للضبط، والمصدر الرسمي مثبت داخل البرنامج لتسهيل الأجهزة الجديدة.",
+    "تنزيل التحديثات مع التحقق من SHA-256 والاستفادة من النسخ الاحتياطي والرجوع عند فشل التطبيق.",
+    "إضافة أساس التفعيل التجاري Offline المرتبط بمعرف التثبيت مع فترة تجربة للتثبيتات التجارية الجديدة.",
+    "استمرار النسخ الاحتياطي المتحقق منه باستخدام SHA-256 وSQLite integrity_check.",
+    "الحفاظ على بيانات المستخدم الحالية وعدم تضمين أي قاعدة بيانات أو أرصدة أو عمليات مالية في حزمة التحديث.",
+    "الهاتف الحالي Mobile Web/PWA وليس تطبيقات iOS/Android موقعة للمتاجر.",
+    "هذه القناة ReleaseCandidate لترقية V7.94 بأمان قبل اعتماد V8.0 على Stable."
   ]
 }
