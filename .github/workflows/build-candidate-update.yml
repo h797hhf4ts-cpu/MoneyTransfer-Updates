@@ -1,0 +1,32 @@
+name: Build MoneyTransfer candidate update
+
+on:
+  push:
+    paths:
+      - 'candidate_payload/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild candidate ZIP
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p releases
+          cat candidate_payload/chunk*.txt | base64 -d > releases/MoneyTransfer_Update_V8_0_1_RC3_Candidate.zip
+          echo "139f92a9868352eb63117db1aa95f1712ca0dfd8a087b3996671b524993475fd  releases/MoneyTransfer_Update_V8_0_1_RC3_Candidate.zip" | sha256sum -c -
+          cp candidate_payload/latest-rc.json latest-rc.json
+          rm -rf candidate_payload
+      - name: Commit candidate asset
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add releases/MoneyTransfer_Update_V8_0_1_RC3_Candidate.zip latest-rc.json candidate_payload
+          git commit -m "Publish MoneyTransfer V8.0.1 RC3 candidate update"
+          git push
