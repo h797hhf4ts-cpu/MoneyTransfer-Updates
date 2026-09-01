@@ -4,4 +4,21 @@ Could not determine setup data version!
 If you are sure the setup file is not corrupted, consider 
 filing a bug report at https://innoextract.constexpr.org/issues
 Done with 1 error and 2 warnings.
-INNOEXTRACT_FAILED
+INNOEXTRACT_FAILED_TRY_7ZIP
+
+7-Zip 23.01 (x64) : Copyright (c) 1999-2023 Igor Pavlov : 2023-06-20
+ 64-bit locale=C.UTF-8 Threads:4 OPEN_MAX:65536
+
+Scanning the drive for archives:
+1 file, 24950090 bytes (24 MiB)
+
+Extracting archive: base_installer/MoneyTransfer_Setup_V8_0_3_FINAL.exe
+ERROR: base_installer/MoneyTransfer_Setup_V8_0_3_FINAL.exe
+Cannot open the file as archive
+
+
+Can't open as archive: 1
+Files: 0
+Size:       0
+Compressed: 0
+ALL_EXTRACTORS_FAILED
