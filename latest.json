@@ -1,17 +1,17 @@
 {
   "product": "MoneyTransfer",
-  "version": "7.50.0",
+  "version": "7.60.0",
   "channel": "Stable",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_50_0_Sync_Mobile_Mega.zip",
-  "sha256": "971f19dbbd276b197ba1093caf8ef38e0718a0c533b2ec613fa2ca2033279cdc",
+  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_60_0_Production_Architecture_Mega.zip",
+  "sha256": "1e4b529dbc3ec94ac25744c26af8997c662ddcb52e6cc9f09d5123f184bfaaea",
   "notes_ar": [
-    "Sync + Mobile Mega Update يجمع تحسينات كبيرة للهاتف والمزامنة في إصدار واحد.",
-    "إضافة إدارة أجهزة الهاتف من Windows مع إيقاف وإعادة تفعيل الأجهزة المسجلة.",
-    "تحسين شاشة حالة المزامنة وإظهار حالة الاتصال والطابور بشكل أوضح.",
-    "إضافة مزامنة تلقائية دورية وعند عودة التطبيق للواجهة أو رجوع الاتصال.",
-    "الحفاظ على Offline Queue وclient_tx_id لمنع تكرار العمليات عند ضعف الشبكة.",
-    "تحسين تكامل الهاتف مع العمليات والعملاء والديون والتقارير وكشف الحساب والورديات.",
-    "الحفاظ على API Compatibility 7.26.2 مع Setup الحالي.",
-    "لا تحتوي الحزمة على قاعدة بيانات أو أرصدة أو عمليات مالية."
+    "Production Architecture Mega Update يضيف أساس البنية الإنتاجية مع الحفاظ على البيانات الحالية.",
+    "تقوية إعدادات SQLite الحالية وإضافة فحوصات سلامة وجاهزية تشغيلية.",
+    "إضافة مركز جاهزية تجارية وفحوصات للبنية والخادم والنسخ الاحتياطي.",
+    "إضافة نسخ احتياطي متسق لقاعدة بيانات السيرفر مع integrity_check وSHA-256.",
+    "إضافة معرف تثبيت ثابت كأساس آمن لنظام الترخيص والاشتراكات القادم.",
+    "إضافة Migration رقم 6 وفحص جاهزية PostgreSQL دون تحويل قاعدة البيانات الحالية تلقائياً.",
+    "إصلاح تهيئة السيرفر الجديد عند عدم وجود قاعدة بيانات قديمة للترحيل.",
+    "لا تحتوي الحزمة على قاعدة بيانات أو أرصدة أو عمليات مالية، ولا تفعل PostgreSQL تلقائياً."
   ]
 }
