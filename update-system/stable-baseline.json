@@ -1,0 +1,26 @@
+{
+  "product": "MoneyTransfer",
+  "baseline_version": "8.3.4",
+  "baseline_sequence": 803400,
+  "schema_version": 9,
+  "channel": "Stable",
+  "installed_runtime_required": true,
+  "runtime_notes": [
+    "V8.3.4 is the full installer baseline because the embedded Windows runtime includes ReportLab, arabic-reshaper and python-bidi.",
+    "Do not use direct_files to upgrade pre-V8.3.4 installations to V8.3.4 because direct_files cannot replace the embedded EXE runtime dependencies.",
+    "Future source-only updates after V8.3.4 may use direct_files when no embedded-runtime dependency or executable change is required."
+  ],
+  "protected_paths": [
+    "financial_pos.db",
+    "server/data",
+    "server_runtime/data",
+    "data",
+    "backups",
+    "updates/backups",
+    "license.json",
+    "installation.json"
+  ],
+  "official_feed": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/latest.json",
+  "client_download_metadata": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/client-download.json",
+  "status": "baseline-established-feed-not-yet-promoted"
+}
