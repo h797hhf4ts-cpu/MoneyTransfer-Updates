@@ -1,15 +1,14 @@
 {
   "product": "MoneyTransfer",
-  "version": "8.0.8",
+  "version": "8.0.9",
   "channel": "Stable",
-  "package_url": "https://github.com/h797hhf4ts-cpu/MoneyTransfer-Updates/releases/download/v8.0.8/MoneyTransfer_Update_V8_0_8_DEBT_SSL_FIX.zip",
-  "sha256": "08e71450fb38fea3030efe180a1d6c94f0664f23409509bc2581e4bcf9dae6e4",
+  "package_url": "https://github.com/h797hhf4ts-cpu/MoneyTransfer-Updates/releases/download/v8.0.9/MoneyTransfer_Update_V8_0_9_OPERATION_SWITCH_FIX.zip",
+  "sha256": "13f0279254893d341bf8d87881a041b6e846ed6b419b169334672f7b7c0375a4",
   "notes_ar": [
-    "إصلاح حفظ إضافة الدين والسداد في وضع Local-First وعدم اشتراط ربط السيرفر.",
-    "إضافة الدين تخصم المبلغ من الحساب المحدد وتزيد رصيد دين العميل.",
-    "سداد الدين يخفض دين العميل ويعيد المبلغ إلى الحساب المحدد للسداد.",
-    "إصلاح CERTIFICATE_VERIFY_FAILED في التحديث عبر الإنترنت باستخدام Windows TLS fallback آمن دون تعطيل التحقق من SSL.",
-    "تضمين online_update.py و update_engine_v2.py في الحزمة حتى تنتقل إصلاحات محرك التحديث للأجهزة.",
+    "إصلاح التنقل بين حوالة صادرة وحوالة واردة ودفع فاتورة ونقل الأموال وباقي بطاقات العمليات.",
+    "منع رجوع الشاشة تلقائياً إلى حوالة صادرة عند اختيار عملية أخرى.",
+    "إزالة اختصارات Tk القديمة المتراكمة وإعادة ربط F1 وF2 بالواجهة الحالية فقط.",
+    "يتضمن إصلاح الدين Local-First وإصلاح التحديث الآمن عبر الإنترنت من V8.0.8.",
     "يتضمن إصلاحات العملاء والحوالات المعلقة والوردية السابقة."
   ]
 }
