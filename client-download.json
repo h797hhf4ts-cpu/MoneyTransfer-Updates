@@ -1,0 +1,15 @@
+{
+  "product": "MoneyTransfer",
+  "version": "8.3.4",
+  "channel": "Stable",
+  "setup_url": "https://github.com/h797hhf4ts-cpu/MoneyTransfer-Updates/releases/download/v8.3.4/MoneyTransfer_Setup_V8_3_4.exe",
+  "sha256": "9f546a51cd2e858f4f7d02b638befe6dbdfab2534df32fe28f20812161ed19a0",
+  "size_bytes": 31863415,
+  "release_url": "https://github.com/h797hhf4ts-cpu/MoneyTransfer-Updates/releases/tag/v8.3.4",
+  "notes_ar": [
+    "نسخة العميل المستقرة V8.3.4.",
+    "تثبيت Windows كامل مع دعم PDF والطباعة.",
+    "دعم العمل المحلي حتى عند انقطاع الإنترنت أو توقف الخادم المحلي.",
+    "يتضمن اختيار الاحتفاظ بالبيانات السابقة أو بدء قاعدة بيانات نظيفة عند تشغيل المثبت بعد تثبيت سابق."
+  ]
+}
