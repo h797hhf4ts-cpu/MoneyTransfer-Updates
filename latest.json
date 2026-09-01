@@ -1,17 +1,16 @@
 {
   "product": "MoneyTransfer",
-  "version": "7.90.0",
+  "version": "7.91.0",
   "channel": "Stable",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_90_0_Release_Candidate_Mega.zip",
-  "sha256": "af0f0cd50db0d1a304c36550fc600eb0e4a29f49526a1d98e03eec3ef122388e",
+  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_91_0_RC_Readiness_Center_Fix.zip",
+  "sha256": "e83b1c0bfc3418c8c1fb350cd9d8fb11b43be22310e26d26f3c62f6581edb00d",
   "notes_ar": [
-    "Release Candidate Mega Update يضيف طبقة فحص شاملة قبل الانتقال إلى V8.0.",
-    "إضافة فحص سلامة Ledger وكشف العمليات غير المتوازنة والسجلات اليتيمة.",
-    "إضافة فحص تكرار client_tx_id وسلامة ديون العملاء وحالة قاعدة البيانات.",
-    "إضافة فحوصات النسخ الاحتياطية والجاهزية الإنتاجية ضمن مركز Release Candidate.",
-    "إضافة زر فحص Release Candidate داخل إعدادات Windows مع درجة جاهزية وتفاصيل كل اختبار.",
-    "الحفاظ على API Compatibility 7.26.2 وSchema 6 وعدم تحويل قاعدة البيانات تلقائياً إلى PostgreSQL.",
-    "لا تحتوي الحزمة على ملفات قاعدة بيانات أو أرصدة أو عمليات مالية.",
-    "V8.0 لن يعتبر إصداراً تجارياً نهائياً قبل اجتياز فحوصات الجاهزية الفعلية."
+    "RC Readiness Center Fix يجعل مركز فحص الجاهزية لـ V8 واضحاً ومتاحاً مباشرة من إعدادات Windows.",
+    "إضافة مركز موحد يعرض درجة الجاهزية ونتائج Passed وWarning وFailed بدلاً من النوافذ المتفرقة.",
+    "إضافة إنشاء نسخة احتياطية آمنة من داخل مركز الجاهزية ثم إعادة الفحص مباشرة.",
+    "التحقق من أحدث نسخة احتياطية باستخدام SHA-256 وSQLite integrity_check.",
+    "معالجة حالة Backups: 0 التي ظهرت أثناء اختبار Release Candidate.",
+    "الحفاظ على API Compatibility 7.26.2 وSchema 6 دون تغيير قواعد المحاسبة أو الأرصدة.",
+    "لا تحتوي الحزمة على قاعدة بيانات أو أرصدة أو عمليات مالية."
   ]
 }
