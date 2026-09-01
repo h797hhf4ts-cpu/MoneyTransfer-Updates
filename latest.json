@@ -1,14 +1,14 @@
 {
   "product": "MoneyTransfer",
-  "version": "8.0.9",
+  "version": "8.0.10",
   "channel": "Stable",
-  "package_url": "https://github.com/h797hhf4ts-cpu/MoneyTransfer-Updates/releases/download/v8.0.9/MoneyTransfer_Update_V8_0_9_OPERATION_SWITCH_FIX.zip",
-  "sha256": "13f0279254893d341bf8d87881a041b6e846ed6b419b169334672f7b7c0375a4",
+  "package_url": "https://github.com/h797hhf4ts-cpu/MoneyTransfer-Updates/releases/download/v8.0.10/MoneyTransfer_Update_V8_0_10_UPDATER_INSTALL_FIX.zip",
+  "sha256": "e54f18c3ba6dd7cea348f2b2d9fd8ab017a5015bcf0874c7d1763d694d51dc58",
   "notes_ar": [
-    "إصلاح التنقل بين حوالة صادرة وحوالة واردة ودفع فاتورة ونقل الأموال وباقي بطاقات العمليات.",
-    "منع رجوع الشاشة تلقائياً إلى حوالة صادرة عند اختيار عملية أخرى.",
-    "إزالة اختصارات Tk القديمة المتراكمة وإعادة ربط F1 وF2 بالواجهة الحالية فقط.",
-    "يتضمن إصلاح الدين Local-First وإصلاح التحديث الآمن عبر الإنترنت من V8.0.8.",
-    "يتضمن إصلاحات العملاء والحوالات المعلقة والوردية السابقة."
+    "إصلاح مرحلة تطبيق التحديث بعد اكتشاف الإصدار الجديد.",
+    "تشغيل محرك التحديث كعملية خارجية حتى يستطيع استبدال ملفات MoneyTransfer بعد إغلاقه.",
+    "إضافة مسار إعادة تشغيل البرنامج بعد تطبيق التحديث.",
+    "يتضمن إصلاح التنقل بين العمليات من V8.0.9.",
+    "يتضمن إصلاح الدين Local-First وإصلاح اتصال HTTPS والتحديثات السابقة."
   ]
 }
