@@ -1,0 +1,38 @@
+name: Assemble MoneyTransfer V8.3.5 update
+
+on:
+  push:
+    paths:
+      - 'staging/v8.3.5/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Assemble update package
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p updates/v8.3.5
+          cat staging/v8.3.5/chunk_*.b64 | base64 -d > updates/v8.3.5/MoneyTransfer_Update_V8_3_5_COMBINED_FIX.zip
+          echo '873dc5e882797a8b435362950ffda32a8d49f8ee319eca578a5d9dbd636b9576  updates/v8.3.5/MoneyTransfer_Update_V8_3_5_COMBINED_FIX.zip' | sha256sum -c -
+          unzip -t updates/v8.3.5/MoneyTransfer_Update_V8_3_5_COMBINED_FIX.zip
+      - name: Commit assembled package
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add updates/v8.3.5/MoneyTransfer_Update_V8_3_5_COMBINED_FIX.zip
+          if git diff --cached --quiet; then
+            echo 'Package already committed.'
+            exit 0
+          fi
+          git commit -m 'Publish MoneyTransfer V8.3.5 combined update package'
+          git push
