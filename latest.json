@@ -1,14 +1,13 @@
 {
   "product": "MoneyTransfer",
-  "version": "8.0.10",
+  "version": "8.0.11",
   "channel": "Stable",
-  "package_url": "https://github.com/h797hhf4ts-cpu/MoneyTransfer-Updates/releases/download/v8.0.10/MoneyTransfer_Update_V8_0_10_UPDATER_INSTALL_FIX.zip",
-  "sha256": "e54f18c3ba6dd7cea348f2b2d9fd8ab017a5015bcf0874c7d1763d694d51dc58",
+  "package_url": "https://github.com/h797hhf4ts-cpu/MoneyTransfer-Updates/releases/download/v8.0.11/MoneyTransfer_Update_V8_0_11_STABLE_RECOVERY.1.zip",
+  "sha256": "d8f1e2b958fa5ace2f4f73bc5bc525fed6faf5e525b8bac0dc55ff4bcb2a609a",
   "notes_ar": [
-    "إصلاح مرحلة تطبيق التحديث بعد اكتشاف الإصدار الجديد.",
-    "تشغيل محرك التحديث كعملية خارجية حتى يستطيع استبدال ملفات MoneyTransfer بعد إغلاقه.",
-    "إضافة مسار إعادة تشغيل البرنامج بعد تطبيق التحديث.",
-    "يتضمن إصلاح التنقل بين العمليات من V8.0.9.",
-    "يتضمن إصلاح الدين Local-First وإصلاح اتصال HTTPS والتحديثات السابقة."
+    "إصلاح مسار اكتشاف وتطبيق التحديث.",
+    "توحيد قناة الحزمة والخادم على Stable.",
+    "الحفاظ على قاعدة البيانات والترخيص والبيانات المحلية.",
+    "يتضمن إصلاحات العمليات والدين والحوالات المعلقة السابقة."
   ]
 }
