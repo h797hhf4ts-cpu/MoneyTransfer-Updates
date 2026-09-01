@@ -1,7 +1,7 @@
 {
   "product": "MoneyTransfer",
   "version": "7.92.0",
-  "channel": "Stable",
+  "channel": "ReleaseCandidate",
   "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_92_0_Financial_Integrity_Diagnostic.zip",
   "sha256": "175c630b23bcd84b97e09cc07f221d9edec2e62d0761e9309327617fd70fba3b",
   "notes_ar": [
