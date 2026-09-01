@@ -1,16 +1,16 @@
 {
   "product": "MoneyTransfer",
-  "version": "7.91.0",
+  "version": "7.92.0",
   "channel": "Stable",
-  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_91_0_RC_Readiness_Center_Fix.zip",
-  "sha256": "e83b1c0bfc3418c8c1fb350cd9d8fb11b43be22310e26d26f3c62f6581edb00d",
+  "package_url": "https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V7_92_0_Financial_Integrity_Diagnostic.zip",
+  "sha256": "175c630b23bcd84b97e09cc07f221d9edec2e62d0761e9309327617fd70fba3b",
   "notes_ar": [
-    "RC Readiness Center Fix يجعل مركز فحص الجاهزية لـ V8 واضحاً ومتاحاً مباشرة من إعدادات Windows.",
-    "إضافة مركز موحد يعرض درجة الجاهزية ونتائج Passed وWarning وFailed بدلاً من النوافذ المتفرقة.",
-    "إضافة إنشاء نسخة احتياطية آمنة من داخل مركز الجاهزية ثم إعادة الفحص مباشرة.",
-    "التحقق من أحدث نسخة احتياطية باستخدام SHA-256 وSQLite integrity_check.",
-    "معالجة حالة Backups: 0 التي ظهرت أثناء اختبار Release Candidate.",
-    "الحفاظ على API Compatibility 7.26.2 وSchema 6 دون تغيير قواعد المحاسبة أو الأرصدة.",
+    "Financial Integrity Diagnostic يحسن فحص سلامة القيود المالية قبل V8.0.",
+    "استبدال الفحص الخام الذي كان يعتبر كل أثر صافي غير صفري خطأ بفحص يفهم نوع العملية وقاعدتها المحاسبية.",
+    "إضافة شاشة تشخيص تفصيلية تعرض رقم العملية والنوع والحالة والأثر الفعلي والمتوقع وسبب التصنيف.",
+    "التشخيص قراءة فقط ولا يعدل الأرصدة أو العمليات تلقائياً.",
+    "يساعد على التمييز بين الحالات الصحيحة محاسبياً وبين الأخطاء الحقيقية التي تحتاج إصلاحاً آمناً بعد نسخة احتياطية.",
+    "الحفاظ على API Compatibility 7.26.2 وSchema 6 دون تغيير قواعد المحاسبة الحالية.",
     "لا تحتوي الحزمة على قاعدة بيانات أو أرصدة أو عمليات مالية."
   ]
 }
