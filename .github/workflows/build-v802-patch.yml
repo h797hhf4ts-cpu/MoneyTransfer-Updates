@@ -45,15 +45,19 @@ jobs:
             "api_version": "7.26.2",
             "schema_version": 6,
             "channel": "Stable",
-            "description": "Verified V8.0.2 spinner text patch"
+            "description": "Verified immutable V8.0.2 spinner text patch"
           }
           JSON
+          PKG='releases/MoneyTransfer_Update_V8_0_2_Spinner_R2.zip'
           (
             cd v802_patch_build
-            zip -q -9 ../releases/MoneyTransfer_Update_V8_0_2_Verified_TextPatch.zip update_manifest.json version.json text_patch.json
+            zip -q -9 ../$PKG update_manifest.json version.json text_patch.json
           )
-          test "$(stat -c%s releases/MoneyTransfer_Update_V8_0_2_Verified_TextPatch.zip)" -gt 1000
-          SHA="$(sha256sum releases/MoneyTransfer_Update_V8_0_2_Verified_TextPatch.zip | awk '{print $1}')"
+          unzip -t "$PKG"
+          unzip -p "$PKG" version.json | grep -q '"app_version": "8.0.2"'
+          unzip -p "$PKG" update_manifest.json | grep -q '"version": "8.0.2"'
+          test "$(stat -c%s "$PKG")" -gt 1000
+          SHA="$(sha256sum "$PKG" | awk '{print $1}')"
           python - "$SHA" <<'PY'
           import json,sys
           sha=sys.argv[1]
@@ -61,13 +65,14 @@ jobs:
             "product":"MoneyTransfer",
             "version":"8.0.2",
             "channel":"Stable",
-            "package_url":"https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_2_Verified_TextPatch.zip",
+            "package_url":"https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_2_Spinner_R2.zip",
             "sha256":sha,
             "notes_ar":[
               "إضافة أسهم للمبلغ والعمولة.",
               "الأسهم اليسرى تزيد أو تنقص 1.000.",
               "الأسهم اليمنى تزيد أو تنقص 0.050.",
-              "القيمة لا تنخفض عن صفر، والعمولة تبقى فارغة عند فتح العملية."
+              "القيمة لا تنخفض عن صفر، والعمولة تبقى فارغة عند فتح العملية.",
+              "حزمة باسم ثابت جديد لمنع مشاكل التخزين المؤقت."
             ]
           }
           open('patch_v802/latest-v802.json','w',encoding='utf-8').write(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
@@ -79,6 +84,6 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add releases/MoneyTransfer_Update_V8_0_2_Verified_TextPatch.zip patch_v802/latest-v802.json patch_v802_publish
-          git commit -m "Build verified MoneyTransfer V8.0.2 text patch"
+          git add releases/MoneyTransfer_Update_V8_0_2_Spinner_R2.zip patch_v802/latest-v802.json patch_v802_publish
+          git commit -m "Build immutable MoneyTransfer V8.0.2 spinner R2"
           git push
