@@ -1,0 +1,84 @@
+name: Build MoneyTransfer V8.0.2 patch package
+
+on:
+  push:
+    paths:
+      - 'patch_v802_publish/READY'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and verify V8.0.2 patch package
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf v802_patch_build
+          mkdir -p v802_patch_build releases
+          cp patch_v802/text_patch.json v802_patch_build/text_patch.json
+          python - <<'PY'
+          import json
+          p='v802_patch_build/text_patch.json'
+          data=json.load(open(p,encoding='utf-8'))
+          assert isinstance(data.get('patches'),list) and data['patches']
+          assert data['patches'][0]['path']=='desktop/financial_transfer_system_v7_9_0.py'
+          assert len(data['patches'][0]['replacements'])==2
+          PY
+          cat > v802_patch_build/version.json <<'JSON'
+          {
+            "app_version": "8.0.2",
+            "api_compatibility": "7.26.2",
+            "runtime_version": "8.0.2",
+            "schema_version": 6,
+            "channel": "Stable"
+          }
+          JSON
+          cat > v802_patch_build/update_manifest.json <<'JSON'
+          {
+            "manifest_version": 2,
+            "product": "MoneyTransfer",
+            "version": "8.0.2",
+            "api_version": "7.26.2",
+            "schema_version": 6,
+            "channel": "Stable",
+            "description": "Verified V8.0.2 spinner text patch"
+          }
+          JSON
+          (
+            cd v802_patch_build
+            zip -q -9 ../releases/MoneyTransfer_Update_V8_0_2_Verified_TextPatch.zip update_manifest.json version.json text_patch.json
+          )
+          test "$(stat -c%s releases/MoneyTransfer_Update_V8_0_2_Verified_TextPatch.zip)" -gt 1000
+          SHA="$(sha256sum releases/MoneyTransfer_Update_V8_0_2_Verified_TextPatch.zip | awk '{print $1}')"
+          python - "$SHA" <<'PY'
+          import json,sys
+          sha=sys.argv[1]
+          data={
+            "product":"MoneyTransfer",
+            "version":"8.0.2",
+            "channel":"Stable",
+            "package_url":"https://raw.githubusercontent.com/h797hhf4ts-cpu/MoneyTransfer-Updates/main/releases/MoneyTransfer_Update_V8_0_2_Verified_TextPatch.zip",
+            "sha256":sha,
+            "notes_ar":[
+              "إضافة أسهم للمبلغ والعمولة.",
+              "الأسهم اليسرى تزيد أو تنقص 1.000.",
+              "الأسهم اليمنى تزيد أو تنقص 0.050.",
+              "القيمة لا تنخفض عن صفر، والعمولة تبقى فارغة عند فتح العملية."
+            ]
+          }
+          open('patch_v802/latest-v802.json','w',encoding='utf-8').write(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
+          PY
+          rm -rf v802_patch_build patch_v802_publish
+      - name: Commit verified V8.0.2 package
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add releases/MoneyTransfer_Update_V8_0_2_Verified_TextPatch.zip patch_v802/latest-v802.json patch_v802_publish
+          git commit -m "Build verified MoneyTransfer V8.0.2 text patch"
+          git push
